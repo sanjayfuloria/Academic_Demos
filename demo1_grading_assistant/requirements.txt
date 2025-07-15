@@ -1,0 +1,5 @@
+transformers
+torch
+numpy
+streamlit
+sentence-transformers
