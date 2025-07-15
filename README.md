@@ -1,17 +1,47 @@
 # Academic_Demos
 
-## Automated Grading Assistant Demo
+## 📝 Assignment Feedback Generator
 
-This demo implements an automated grading system that evaluates student short-answer responses using natural language processing techniques.
+An intelligent automated grading system that evaluates student responses using advanced natural language processing and provides comprehensive feedback across multiple criteria.
 
-### Setup
+![Assignment Feedback Generator Interface](https://github.com/user-attachments/assets/c02c1d3e-55bb-4844-a851-723732e06dce)
 
-1. Navigate to the demo directory:
+### ✨ Features
+
+- **Multi-Criteria Grading**: Evaluates responses across four key dimensions:
+  - Content Accuracy (40%) - How well the answer matches expected content
+  - Completeness (30%) - Coverage of key points and concepts  
+  - Clarity (20%) - How clearly ideas are expressed
+  - Structure (10%) - Grammar, organization, and presentation
+
+- **Professional Dashboard**: Clean, intuitive Streamlit interface with:
+  - Real-time grade distribution visualization
+  - Detailed individual student breakdowns
+  - Interactive charts and metrics
+  - Configurable assignment types
+
+- **Comprehensive Feedback**: Provides constructive feedback with:
+  - Overall grades (0-5 scale)
+  - Detailed criteria scores
+  - Specific improvement suggestions
+  - Visual progress indicators
+
+- **Multiple Assignment Types**: Optimized for different assessment formats:
+  - Short answers
+  - Essays  
+  - Explanations
+  - Analysis responses
+
+![Grading Results Dashboard](https://github.com/user-attachments/assets/92f9fecf-15de-40ea-9aa6-b7822a258b16)
+
+### 🚀 Quick Start
+
+1. **Navigate to the demo directory:**
 ```bash
 cd demo1_grading_assistant
 ```
 
-2. Create and activate a virtual environment:
+2. **Create and activate virtual environment:**
 ```bash
 python -m venv venv
 # On Windows
@@ -20,27 +50,85 @@ venv\Scripts\activate
 source venv/bin/activate
 ```
 
-3. Install dependencies:
+3. **Install dependencies:**
 ```bash
 pip install -r requirements.txt
 ```
 
-### Running the Demo
-
-1. Run tests:
+4. **Run tests:**
 ```bash
 python -m unittest test_grading_assistant.py
 ```
 
-2. Start the web interface:
+5. **Start the application:**
 ```bash
 streamlit run app.py
 ```
 
-3. Open your browser and go to http://localhost:8501
+6. **Open your browser:** Go to http://localhost:8501
 
-### Usage
+### 📋 How to Use
 
-1. Enter a reference (correct) answer
-2. Enter student answers (up to 10)
-3. Click "Grade Answers" to see results
+1. **Setup**: Enter a reference answer and select assignment type
+2. **Input**: Add student responses (up to 10 supported)
+3. **Grade**: Click "Grade Responses" to analyze submissions
+4. **Review**: Examine detailed feedback and scores for each student
+
+### 🛠️ Technical Implementation
+
+- **Backend**: Python with semantic similarity analysis
+- **NLP Processing**: Sentence transformers with fallback algorithms
+- **Frontend**: Streamlit with Plotly visualizations
+- **Testing**: Comprehensive unit test coverage
+- **Architecture**: Modular design for easy extension
+
+### 📊 Grading Algorithm
+
+The system uses a weighted scoring approach:
+
+1. **Content Accuracy**: Semantic similarity to reference answer
+2. **Completeness**: Coverage of key concepts and terms
+3. **Clarity**: Sentence structure and readability analysis  
+4. **Structure**: Grammar, punctuation, and organization
+
+### 🔧 Configuration
+
+- Assignment types can be customized for different subjects
+- Grading criteria weights are configurable
+- Supports both transformer-based and fallback similarity methods
+- Detailed scoring can be toggled on/off
+
+### 🧪 Testing
+
+Run the comprehensive test suite:
+```bash
+python -m unittest test_grading_assistant.py -v
+```
+
+Tests cover:
+- Similarity calculations
+- Individual criteria assessment
+- Multi-response grading
+- Feedback generation
+- Edge cases and error handling
+
+### 📈 Example Results
+
+The system provides rich analytics including:
+- Average class performance (e.g., 3.3/5)
+- Grade distribution charts
+- Individual student breakdowns
+- Criteria-specific scoring
+- Actionable improvement feedback
+
+### 🤝 Contributing
+
+This demo showcases automated educational assessment capabilities. Feel free to extend with:
+- Additional assignment types
+- Custom grading rubrics
+- Integration with LMS systems
+- Advanced NLP models
+
+### 📄 License
+
+Part of the Academic_Demos collection - educational and demonstration purposes.

@@ -3,3 +3,5 @@ torch
 numpy
 streamlit
 sentence-transformers
+plotly
+pandas
