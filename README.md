@@ -44,3 +44,26 @@ streamlit run app.py
 1. Enter a reference (correct) answer
 2. Enter student answers (up to 10)
 3. Click "Grade Answers" to see results
+
+## SSL Troubleshooting
+
+If you encounter SSL certificate issues while downloading the model, try these solutions:
+
+1. Update your certificates:
+   ```bash
+   pip install --upgrade certifi
+   ```
+
+2. For macOS, run:
+   ```bash
+   /Applications/Python\ 3.x/Install\ Certificates.command
+   ```
+
+3. For Linux:
+   ```bash
+   sudo update-ca-certificates
+   ```
+
+4. If issues persist, the code will automatically try alternative approaches:
+   - Using an alternative model
+   - Temporarily disabling SSL verification (not recommended for production)

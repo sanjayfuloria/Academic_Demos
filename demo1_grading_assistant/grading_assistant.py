@@ -1,11 +1,31 @@
+import os
+import ssl
 from sentence_transformers import SentenceTransformer
 import numpy as np
 from typing import List, Tuple
 
 class GradingAssistant:
     def __init__(self):
-        # Initialize the BERT model for semantic similarity
-        self.model = SentenceTransformer('all-MiniLM-L6-v2')
+        # Try different approaches to handle SSL issues
+        try:
+            # First attempt: Default configuration
+            self.model = SentenceTransformer('all-MiniLM-L6-v2')
+        except Exception as e1:
+            try:
+                # Second attempt: Use alternative model
+                self.model = SentenceTransformer('paraphrase-MiniLM-L3-v2')
+            except Exception as e2:
+                try:
+                    # Third attempt: Disable SSL verification (not recommended for production)
+                    os.environ['CURL_CA_BUNDLE'] = ''
+                    ssl._create_default_https_context = ssl._create_unverified_context
+                    self.model = SentenceTransformer('all-MiniLM-L6-v2')
+                except Exception as e3:
+                    try:
+                        # Fourth attempt: Try offline mode with smaller model
+                        self.model = SentenceTransformer('all-MiniLM-L6-v2', local_files_only=True)
+                    except Exception as e4:
+                        raise Exception(f"Failed to initialize model. Tried multiple approaches:\n1. {str(e1)}\n2. {str(e2)}\n3. {str(e3)}\n4. {str(e4)}\n\nTip: If you're experiencing network issues, try downloading the model manually or using an offline environment.")
         
     def calculate_similarity(self, text1: str, text2: str) -> float:
         # Calculate semantic similarity between two texts
