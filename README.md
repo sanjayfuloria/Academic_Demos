@@ -1,5 +1,30 @@
 # Academic_Demos
 
+A collection of production-grade educational technology demonstrations showcasing AI-powered tools for educators.
+
+## 🚀 Demos
+
+### 📚 LectureKit - Lecture Recording & Management Platform
+
+A modern, production-grade web application for teachers to record lectures, take notes, generate AI summaries, create MCQs, and distribute content to students.
+
+![LectureKit Homepage](https://github.com/user-attachments/assets/c50a0166-e314-4928-ad98-93fd09007d40)
+![LectureKit Dashboard](https://github.com/user-attachments/assets/d4d4fedf-3be2-48ec-93f5-ffe15ef1e3e3)
+![LectureKit Features](https://github.com/user-attachments/assets/beff97e6-35d4-406a-9a04-ab6e31607f8b)
+
+**Tech Stack:** Next.js 14+, TypeScript, Tailwind CSS, Firebase, OpenAI, Gmail OAuth2
+
+**Key Features:**
+- 🎥 Browser-based audio/video recording with MediaRecorder API
+- 📝 Rich-text notes with autosave and timestamp linking
+- ✨ AI-powered lecture summarization with streaming
+- 🎯 Automated MCQ generation with Zod validation
+- 📧 Email distribution via Gmail OAuth2
+
+[**→ View LectureKit Documentation**](demo2_lecturekit/README.md)
+
+---
+
 ## 📝 Assignment Feedback Generator
 
 An intelligent automated grading system that evaluates student responses using advanced natural language processing and provides comprehensive feedback across multiple criteria.

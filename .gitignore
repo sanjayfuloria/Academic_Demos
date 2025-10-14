@@ -47,6 +47,7 @@ node_modules/
 .turbo/
 .env.local
 .env*.local
+!.env.example
 *.tsbuildinfo
 
 # Build outputs
