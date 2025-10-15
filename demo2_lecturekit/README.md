@@ -13,32 +13,47 @@ A production-grade, teacher-facing web application for lecture recording, note-t
 - Preview thumbnails for recorded content
 - Firebase Storage integration with signed upload URLs
 
+### 📁 File Upload & Processing
+- Upload video files (mp4, webm)
+- Upload audio files (mp3, wav, m4a, webm)
+- Upload text files (.txt)
+- Automatic transcription of audio and video files using OpenAI Whisper API
+- File size validation (max 25MB for transcription)
+- Real-time upload status tracking
+- Automatic content addition to lecture notes
+
 ### 📝 Lecture Notes
 - Rich-text note editor with Markdown support
 - Auto-save functionality (saves every 1 second)
 - Timestamp insertion linked to recording position
 - Real-time character count
+- Support for typed text, uploaded files, and transcribed content
 
 ### ✨ AI-Powered Summarization
-- OpenAI integration for lecture summarization
+- OpenAI GPT-4 integration for lecture summarization
 - Streaming responses for real-time feedback
 - Persistent summary storage
 - Token usage tracking
+- Works with typed notes, uploaded files, and transcribed recordings
+- Fallback to mock summaries when API key not configured
 
 ### 🎯 MCQ Generation
-- Automated multiple-choice question generation from summaries
-- Configurable question count and difficulty levels
+- Automated multiple-choice question generation from summaries using OpenAI
+- Configurable question count (1-20) and difficulty levels (easy/medium/hard/mixed)
 - Zod validation for strict JSON structure
 - Editable table UI with add/edit/delete functionality
 - Four options per question with exactly one correct answer
 - Rationale for each correct answer
+- Fallback to mock MCQs when API key not configured
 
 ### 📧 Email Distribution
-- Gmail OAuth2 integration via Nodemailer
-- HTML email formatting with styled MCQs
+- Send summaries to students via email
+- Send MCQs to students via email
+- Support for multiple recipients (comma-separated)
+- HTML email formatting
 - Optional CSV attachment support
-- Send status tracking per mailout
-- Bulk email to multiple recipients
+- Send status tracking
+- Gmail OAuth2 integration ready (simulated in demo mode)
 
 ## 🛠️ Tech Stack
 
@@ -111,33 +126,55 @@ Navigate to [http://localhost:3000](http://localhost:3000)
 6. Click "Stop" when finished
 7. Recording automatically uploads to Firebase Storage
 
+### Uploading Files
+
+1. Go to the "Upload Files" section
+2. Click on the upload area to select a file
+3. Choose a video, audio, or text file
+4. Click "Upload & Process"
+5. For audio/video files: The file will be automatically transcribed using OpenAI Whisper
+6. For text files: The content will be directly added to your notes
+7. Transcribed or uploaded content appears in the lecture notes section
+
 ### Taking Notes
 
 1. Type in the notes editor (auto-save enabled)
 2. Click "Insert Timestamp" to add time markers
 3. Notes are saved automatically every second
+4. Upload files or transcribe recordings to add content automatically
 
 ### Generating a Summary
 
-1. Complete your lecture notes
+1. Complete your lecture notes (by typing, recording, or uploading files)
 2. Click "Summarize Lecture"
 3. Watch as the AI streams the summary in real-time
 4. Summary is automatically persisted
+5. Note: Requires OpenAI API key; uses mock summary if not configured
 
 ### Creating MCQs
 
 1. Generate a summary first
-2. Select number of questions and difficulty level
+2. Select number of questions (1-20) and difficulty level
 3. Click "Generate MCQs"
 4. Edit questions, options, and rationales as needed
 5. Add or delete questions manually
+6. Note: Requires OpenAI API key; uses mock MCQs if not configured
 
 ### Sending to Students
 
-1. Generate MCQs
-2. Enter student email addresses (comma-separated)
-3. Click "Send to Students"
-4. HTML email with MCQs is sent via Gmail
+**Sending Summaries:**
+1. Generate a summary first
+2. Scroll to "Email Summary" section
+3. Enter student email addresses (comma-separated)
+4. Click "Send Summary"
+
+**Sending MCQs:**
+1. Generate MCQs first
+2. Scroll to "Email Distribution" section in MCQs panel
+3. Enter student email addresses (comma-separated)
+4. Click "Send to Students"
+
+Note: Email sending is simulated in demo mode. Configure Gmail OAuth for production use.
 
 ## 🧪 Testing
 
@@ -159,23 +196,24 @@ npx playwright test --ui
 demo2_lecturekit/
 ├── app/
 │   ├── api/              # API routes
-│   │   ├── summary/      # Summary generation
-│   │   ├── mcqs/         # MCQ generation
-│   │   ├── email/        # Email sending
-│   │   └── recording/    # Recording uploads
+│   │   ├── summary/      # Summary generation with OpenAI
+│   │   ├── mcqs/         # MCQ generation with OpenAI
+│   │   ├── email/        # Email sending (summaries & MCQs)
+│   │   └── transcribe/   # Audio/video transcription with Whisper
 │   ├── dashboard/        # Dashboard page
 │   └── page.tsx          # Homepage
 ├── components/           # React components
 │   ├── RecordingPanel.tsx
+│   ├── FileUploadPanel.tsx   # NEW: File upload & transcription
 │   ├── NotesEditor.tsx
-│   ├── SummaryPanel.tsx
+│   ├── SummaryPanel.tsx      # Enhanced with email feature
 │   └── MCQPanel.tsx
 ├── lib/                  # Utilities and configurations
 │   ├── types.ts          # TypeScript interfaces
-│   ├── firebaseClient.ts # Firebase client SDK
-│   ├── firebaseAdmin.ts  # Firebase Admin SDK
-│   ├── openai.ts         # OpenAI integration
-│   └── gmail.ts          # Gmail OAuth utilities
+│   ├── openai.ts         # OpenAI integration (Whisper, GPT-4, etc.)
+│   ├── firebaseClient.ts # Firebase client SDK (optional)
+│   ├── firebaseAdmin.ts  # Firebase Admin SDK (optional)
+│   └── gmail.ts          # Gmail OAuth utilities (optional)
 └── tests/                # Playwright tests
 ```
 
