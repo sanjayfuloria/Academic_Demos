@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { generateSummary } from '@/lib/openai';
 
 export async function POST(request: NextRequest) {
   try {
@@ -8,11 +9,14 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Notes are required' }, { status: 400 });
     }
 
-    const stream = new ReadableStream({
-      async start(controller) {
-        const encoder = new TextEncoder();
-        
-        const summaryText = `# Lecture Summary
+    // Check if OpenAI API key is configured
+    if (!process.env.OPENAI_API_KEY) {
+      // Fallback to mock summary if API key not configured
+      const stream = new ReadableStream({
+        async start(controller) {
+          const encoder = new TextEncoder();
+          
+          const summaryText = `# Lecture Summary
 
 This lecture covered the following key topics:
 
@@ -32,16 +36,27 @@ ${notes.substring(0, 200)}...
 **Conclusion:**
 The lecture provided comprehensive coverage of the material, with emphasis on both theoretical understanding and practical implementation.`;
 
-        const words = summaryText.split(' ');
-        for (let i = 0; i < words.length; i++) {
-          const chunk = words[i] + ' ';
-          controller.enqueue(encoder.encode(chunk));
-          await new Promise(resolve => setTimeout(resolve, 50));
-        }
+          const words = summaryText.split(' ');
+          for (let i = 0; i < words.length; i++) {
+            const chunk = words[i] + ' ';
+            controller.enqueue(encoder.encode(chunk));
+            await new Promise(resolve => setTimeout(resolve, 50));
+          }
 
-        controller.close();
-      },
-    });
+          controller.close();
+        },
+      });
+
+      return new Response(stream, {
+        headers: {
+          'Content-Type': 'text/plain',
+          'Transfer-Encoding': 'chunked',
+        },
+      });
+    }
+
+    // Use real OpenAI API for summary generation
+    const stream = await generateSummary(notes);
 
     return new Response(stream, {
       headers: {

@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import RecordingPanel from '@/components/RecordingPanel';
+import FileUploadPanel from '@/components/FileUploadPanel';
 import NotesEditor from '@/components/NotesEditor';
 import SummaryPanel from '@/components/SummaryPanel';
 import MCQPanel from '@/components/MCQPanel';
@@ -13,6 +14,15 @@ export default function Dashboard() {
   const [notes, setNotes] = useState('');
   const [summary, setSummary] = useState('');
   const [mcqs, setMcqs] = useState<MCQ[]>([]);
+
+  const handleFileUploaded = (content: string, fileName: string, fileType: 'video' | 'audio' | 'text') => {
+    // Add the transcribed/uploaded content to notes
+    const timestamp = new Date().toLocaleTimeString();
+    const prefix = fileType === 'text' 
+      ? `\n\n--- Uploaded Text File: ${fileName} (${timestamp}) ---\n`
+      : `\n\n--- Transcribed ${fileType} File: ${fileName} (${timestamp}) ---\n`;
+    setNotes(prev => prev + prefix + content);
+  };
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -31,6 +41,15 @@ export default function Dashboard() {
             <RecordingPanel
               onRecordingComplete={(url) => console.log('Recording complete:', url)}
             />
+          </div>
+
+          {/* File Upload Section */}
+          <div className="bg-white rounded-lg shadow-md p-6">
+            <h2 className="text-xl font-semibold mb-4 text-gray-800">📁 Upload Files</h2>
+            <p className="text-sm text-gray-600 mb-4">
+              Upload video, audio, or text files. Audio and video files will be automatically transcribed.
+            </p>
+            <FileUploadPanel onFileUploaded={handleFileUploaded} />
           </div>
 
           {/* Notes Section */}
