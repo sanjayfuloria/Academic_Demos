@@ -41,7 +41,16 @@ export default function MCQPanel({ sessionId, summary, mcqs, onMcqsChange }: MCQ
       }
 
       const data = await response.json();
-      onMcqsChange(data.mcqs);
+      // Normalize the MCQ data structure to use 'q' and 'correctIndex' consistently
+      const normalizedMcqs = data.mcqs.map((mcq: MCQ) => ({
+        id: mcq.id || `mcq-${Date.now()}-${Math.random()}`,
+        q: mcq.question || mcq.q || '',
+        options: mcq.options || [],
+        correctIndex: mcq.correctAnswer !== undefined ? mcq.correctAnswer : mcq.correctIndex || 0,
+        rationale: mcq.rationale || '',
+        difficulty: mcq.difficulty || difficulty,
+      }));
+      onMcqsChange(normalizedMcqs);
     } catch (err) {
       console.error('Error generating MCQs:', err);
       setError('Failed to generate MCQs. Please try again.');
