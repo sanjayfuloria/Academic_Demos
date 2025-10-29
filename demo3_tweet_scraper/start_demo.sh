@@ -21,14 +21,19 @@ echo "✓ Virtual environment activated"
 echo ""
 
 # Install dependencies
+if [ ! -f "requirements.txt" ]; then
+    echo "❌ Error: requirements.txt not found"
+    exit 1
+fi
+
 echo "📥 Installing dependencies..."
 pip install -q -r requirements.txt
 echo "✓ Dependencies installed"
 echo ""
 
-# Run tests
+# Run tests (quiet mode)
 echo "🧪 Running tests..."
-python -m unittest test_tweet_scraper.py -v
+python -m unittest test_tweet_scraper.py
 echo ""
 
 # Offer to run the demo

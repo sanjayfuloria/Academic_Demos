@@ -78,23 +78,23 @@ def example_comparison_analysis():
     print("EXAMPLE 3: Cross-Organizational Comparison")
     print("=" * 70)
     
-    scraper = TweetScraper()
-    
-    # Compare different sectors
+    # Compare different sectors using separate scraper instances
     print("\n📡 Comparing Health vs Environment organizations...")
     
     health_handles = ["@WHO", "@RedCross"]
     env_handles = ["@WWF", "@Greenpeace"]
     
     # Scrape from health orgs
-    health_tweets = scraper.scrape_tweets(health_handles, max_tweets_per_handle=10)
-    health_metrics = scraper.get_engagement_metrics(health_tweets)
-    health_themes = scraper.analyze_themes(health_tweets)
+    health_scraper = TweetScraper()
+    health_tweets = health_scraper.scrape_tweets(health_handles, max_tweets_per_handle=10)
+    health_metrics = health_scraper.get_engagement_metrics()
+    health_themes = health_scraper.analyze_themes()
     
     # Scrape from environment orgs
-    env_tweets = scraper.scrape_tweets(env_handles, max_tweets_per_handle=10)
-    env_metrics = scraper.get_engagement_metrics(env_tweets)
-    env_themes = scraper.analyze_themes(env_tweets)
+    env_scraper = TweetScraper()
+    env_tweets = env_scraper.scrape_tweets(env_handles, max_tweets_per_handle=10)
+    env_metrics = env_scraper.get_engagement_metrics()
+    env_themes = env_scraper.analyze_themes()
     
     print("\n🏥 Health Organizations:")
     print(f"   Tweets:           {len(health_tweets)}")
