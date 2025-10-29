@@ -4,6 +4,31 @@ A collection of production-grade educational technology demonstrations showcasin
 
 ## 🚀 Demos
 
+### 📊 Tweet Scraper - Nonprofit Communication Analysis
+
+A comprehensive research tool for analyzing communication themes and engagement patterns from verified nonprofit organizations and public agencies on Twitter/X.
+
+**Tech Stack:** Python, Streamlit, Plotly, Pandas, Tweepy
+
+**Key Features:**
+- 🎯 Scrapes tweets from 40+ verified nonprofit and public agency handles
+- 📈 Analyzes dominant communication themes (health, environment, disaster, etc.)
+- 💬 Tracks engagement metrics (likes, retweets, replies)
+- ⏰ Examines temporal dynamics and patterns
+- 📊 Interactive dashboard with visual analytics
+- 💾 Exports data in CSV/JSON formats for further analysis
+
+**Research Applications:**
+- Social media communication strategies
+- Crisis and disaster communication analysis
+- Temporal trends in organizational messaging
+- Cross-organizational comparison studies
+- Engagement pattern identification
+
+[**→ View Tweet Scraper Documentation**](demo3_tweet_scraper/README.md)
+
+---
+
 ### 📚 LectureKit - Lecture Recording & Management Platform
 
 A modern, production-grade web application for teachers to record lectures, take notes, generate AI summaries, create MCQs, and distribute content to students.

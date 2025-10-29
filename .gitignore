@@ -58,6 +58,10 @@ dist/
 coverage/
 .nyc_output/
 
+# Tweet scraper exports
+demo3_tweet_scraper/tweets_data.csv
+demo3_tweet_scraper/tweets_analysis.json
+
 # Misc
 .DS_Store
 *.log
