@@ -61,6 +61,9 @@ coverage/
 # Tweet scraper exports
 demo3_tweet_scraper/tweets_data.csv
 demo3_tweet_scraper/tweets_analysis.json
+demo3_tweet_scraper/example_*.csv
+demo3_tweet_scraper/example_*.json
+demo3_tweet_scraper/example_*.txt
 
 # Misc
 .DS_Store
