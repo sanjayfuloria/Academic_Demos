@@ -25,6 +25,23 @@ A modern, production-grade web application for teachers to record lectures, take
 
 ---
 
+### 🎓 Trainer Simulation Game
+
+An interactive simulation game for trainers to practice classroom management and student engagement strategies in realistic teaching scenarios.
+
+**Tech Stack:** Python, Streamlit
+
+**Key Features:**
+- 🎮 Interactive scenario-based gameplay
+- 👥 Diverse student personalities (engaged, quiet, struggling, disruptive, overachiever)
+- 📊 Real-time tracking of engagement, understanding, and energy
+- 🎯 Multiple difficulty levels (easy, normal, hard)
+- 📈 Comprehensive performance reports with actionable tips
+
+[**→ View Trainer Simulation Documentation**](demo3_trainer_simulation/README.md)
+
+---
+
 ## 📝 Assignment Feedback Generator
 
 An intelligent automated grading system that evaluates student responses using advanced natural language processing and provides comprehensive feedback across multiple criteria.
