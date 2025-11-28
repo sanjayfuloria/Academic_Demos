@@ -546,8 +546,15 @@ class TrainerSimulation:
             p: sum(e) / len(e) for p, e in personality_engagement.items()
         }
         
-        strongest = max(avg_by_personality.items(), key=lambda x: x[1])
-        weakest = min(avg_by_personality.items(), key=lambda x: x[1])
+        # Handle edge case of empty class
+        if avg_by_personality:
+            strongest = max(avg_by_personality.items(), key=lambda x: x[1])
+            weakest = min(avg_by_personality.items(), key=lambda x: x[1])
+            strongest_str = f"{strongest[0]} students (avg engagement: {strongest[1]:.0%})"
+            weakest_str = f"{weakest[0]} students (avg engagement: {weakest[1]:.0%})"
+        else:
+            strongest_str = "N/A"
+            weakest_str = "N/A"
         
         return {
             "session_complete": True,
@@ -557,8 +564,8 @@ class TrainerSimulation:
             "overall_performance": round(overall_performance, 2),
             "feedback": feedback,
             "class_averages": status["averages"],
-            "strongest_with": f"{strongest[0]} students (avg engagement: {strongest[1]:.0%})",
-            "needs_work_with": f"{weakest[0]} students (avg engagement: {weakest[1]:.0%})",
+            "strongest_with": strongest_str,
+            "needs_work_with": weakest_str,
             "actions_summary": {
                 "total_actions": len(self.actions_taken),
                 "action_types": self._summarize_actions()
